@@ -1,6 +1,8 @@
-#my-finance app
+# My Finance App
 
-##1. Install
-```shell
+## Setup
+```
 composer install
+docker-compose up -d
+symfony serve -d
 ```
