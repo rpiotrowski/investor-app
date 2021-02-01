@@ -1,4 +1,4 @@
-# My Finance App
+# Investor App
 
 ## Setup
 ```
