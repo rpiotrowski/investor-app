@@ -34,4 +34,22 @@ class Inflation
         return $this->CPI_Index;
     }
 
+    /**
+     * @param int $year
+     */
+    public function setYear(int $year): self
+    {
+        $this->year = $year;
+        return $this;
+    }
+
+    /**
+     * @param float $CPI_Index
+     */
+    public function setCPIIndex(float $CPI_Index): self
+    {
+        $this->CPI_Index = $CPI_Index;
+        return $this;
+    }
+
 }
