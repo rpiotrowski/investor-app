@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Inflation;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,9 +17,8 @@ class InflationController extends AbstractController
 
     /**
      * @Route("/add", name="add_inflation")
-     * @param EntityManager $entityManager
+     * @param EntityManagerInterface $entityManager
      * @return Response
-     * @throws ORMException
      */
     public function addInflation(EntityManagerInterface $entityManager): Response
     {
