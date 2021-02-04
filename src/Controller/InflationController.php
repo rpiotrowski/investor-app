@@ -23,13 +23,20 @@ class InflationController extends AbstractController
     public function addInflation(EntityManagerInterface $entityManager): Response
     {
 
+        $repository = $entityManager->getRepository(Inflation::class);
+
+        //TODO remove hard-coded values
         $inflation = new Inflation();
         $inflation->setYear(2020)
             ->setCPIIndex(103.4);
 
-        $entityManager->persist($inflation);
-        $entityManager->flush();
+        if ($repository->findOneBy(['year' => 2020])) {
+            return new Response(sprintf('The CPI index for year %d is already added.', $inflation->getYear()));
+        } else
+            $entityManager->persist($inflation);
+            $entityManager->flush();
+            return new Response(sprintf('The CPI index for year %d was added.', $inflation->getYear()));
 
-        return new Response(sprintf('The CPI index for year %d was added.', $inflation->getYear()));
+
     }
 }
