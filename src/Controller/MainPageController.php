@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class MainPage extends AbstractController
+class MainPageController extends AbstractController
 {
     /**
      * @Route("/", name="main_page")

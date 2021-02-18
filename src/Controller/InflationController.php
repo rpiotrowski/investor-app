@@ -30,13 +30,14 @@ class InflationController extends AbstractController
         $inflation->setYear(2020)
             ->setCPIIndex(103.4);
 
+        //todo add flash into template
         if ($repository->findOneBy(['year' => 2020])) {
-            return new Response(sprintf('The CPI index for year %d is already added.', $inflation->getYear()));
+            $this->addFlash('succes', sprintf('The CPI index for year %d is already added.', $inflation->getYear()));
         } else
             $entityManager->persist($inflation);
-            $entityManager->flush();
-            return new Response(sprintf('The CPI index for year %d was added.', $inflation->getYear()));
+        $entityManager->flush();
+        $this->addFlash('notice', sprintf('The CPI index for year %d was added.', $inflation->getYear()));
 
-
+        return $this->redirectToRoute('main_page');
     }
 }
