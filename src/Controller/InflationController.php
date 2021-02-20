@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Inflation;
+use App\Repository\InflationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,13 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/inflation", name="inflation")
+ * @Route("/inflation", name="inflation_")
  */
 class InflationController extends AbstractController
 {
 
     /**
-     * @Route("/add", name="add_inflation")
+     * @Route("/add", name="add")
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
@@ -40,5 +41,20 @@ class InflationController extends AbstractController
         }
 
         return $this->redirectToRoute('main_page');
+    }
+
+    /**
+     * @Route ("/", name="show")
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function showInflation(EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Inflation::class);
+        $inflation = $repository->findAll();
+
+        return $this->render('inflation/inflation.html.twig',[
+            'inflation' => $inflation
+        ]);
     }
 }

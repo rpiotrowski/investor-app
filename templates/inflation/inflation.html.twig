@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <h2>CPI Indexes</h2>
+    <div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>Year</th>
+            <th>CPI Index</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cpi in inflation %}
+
+            <tr>
+                <td>{{ cpi.year }}</td>
+                <td>{{ cpi.cPIIndex }}</td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}
