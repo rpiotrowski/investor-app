@@ -19,22 +19,31 @@ class InflationRepository extends ServiceEntityRepository
         parent::__construct($registry, Inflation::class);
     }
 
-    // /**
-    //  * @return Inflation[] Returns an array of Inflation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Inflation[] Returns an array of Inflation objects
+      */
+    public function findYearsWithInflation(): array
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('i.CPI_Index >= 100')
+            ->orderBy('i.year', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
+    /**
+     * @return Inflation[] Returns an array of Inflation objects
+     */
+    public function findYearsWithDEflation(): array
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.CPI_Index < 100')
+            ->orderBy('i.year', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     /*
     public function findOneBySomeField($value): ?Inflation

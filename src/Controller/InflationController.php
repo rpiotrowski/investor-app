@@ -48,7 +48,7 @@ class InflationController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function showInflation(EntityManagerInterface $entityManager): Response
+    public function showCPI(EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Inflation::class);
         $inflation = $repository->findAll();
@@ -57,4 +57,33 @@ class InflationController extends AbstractController
             'inflation' => $inflation
         ]);
     }
+
+    /**
+     * @Route ("/inf", name="inf")
+     * @param InflationRepository $repository
+     * @return Response
+     */
+    public function showInflation(InflationRepository $repository): Response
+    {
+        $inflation = $repository->findYearsWithInflation();
+
+        return $this->render('inflation/inflation.html.twig',[
+            'inflation' => $inflation
+        ]);
+    }
+
+    /**
+     * @Route ("/def", name="def")
+     * @param InflationRepository $repository
+     * @return Response
+     */
+    public function showDeflation(InflationRepository $repository): Response
+    {
+        $deflation = $repository->findYearsWithDeflation();
+
+        return $this->render('inflation/inflation.html.twig',[
+            'inflation' => $deflation
+        ]);
+    }
+
 }
