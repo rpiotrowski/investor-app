@@ -8,5 +8,5 @@
 /var/
 /vendor/
 note
-.idea/
+.idea
 ###< symfony/framework-bundle ###
